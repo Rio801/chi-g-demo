@@ -25,6 +25,7 @@ func NewServer() *models.Server {
 		AllowCredentials: false,
 		MaxAge:           300, // Maximum value not ignored by any of major browsers
 	}))
+	server.Router.Handle("/styles/*", http.StripPrefix("/styles", http.FileServer(http.Dir("./tmpls/styles"))))
 	server.Router.Handle("/js/*", http.StripPrefix("/js", http.FileServer(http.Dir("./tmpls/js"))))
 
 	server.Router.Group(func(r chi.Router) {
